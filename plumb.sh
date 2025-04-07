@@ -6,17 +6,14 @@
 prim="$(xclip -o -selection primary 2>/dev/null || xclip -o -selection clipboard 2>/dev/null)"
 [ -z "$prim" ] && exit
 
-# Define functions with search-friendly URLs
 websearch() { firefox "https://duckduckgo.com/?q=$1"; }
 wikipedia() { firefox "https://en.wikipedia.org/wiki/Special:Search?search=$1"; }
 wiktionary() { firefox "https://en.wiktionary.org/wiki/Special:Search?search=$1"; }
 ebay() { firefox "https://www.ebay.com/sch/$1"; }
 archpkg() { firefox "https://archlinux.org/packages/?q=$1"; firefox "https://aur.archlinux.org/packages?K=$1"; }
 
-# Present menu using dmenu
 func=$(printf "websearch\nwikipedia\nwiktionary\nebay\narchpkg" | dmenu -p "Plumb $prim to?" -i -l 10)
 
-# Execute the selected function
 case "$func" in
   websearch) websearch "$prim" ;;
   wikipedia) wikipedia "$prim" ;;
